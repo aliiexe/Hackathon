@@ -9,17 +9,12 @@ import { axiosclient } from '../../../api/axiosclient';
 
 const formFields = [
   {
-    labelText: "First Name",
-    name: "first-name",
+    labelText: "Nom",
+    name: "name",
     type: "text",
-    register: "firstName"
+    register: "name"
   },
-  {
-    labelText: "Last Name",
-    name: "last-name",
-    type: "text",
-    register: "lastName"
-  },
+
   {
     labelText: "Email",
     name: "email",
@@ -27,13 +22,13 @@ const formFields = [
     register: "email"
   },
   {
-    labelText: "Password",
+    labelText: "Mot de passe",
     name: "password",
     type: "password",
     register: "password"
   },
   {
-    labelText: "Confirm password",
+    labelText: "Confirmer mot de passe",
     name: "password_confirmation",
     type: "password",
     register: "password_confirmation"
@@ -42,21 +37,7 @@ const formFields = [
 
 const Form = ({ setIsOpen, setName, setOpenToS }) => {
   const schema = yup.object().shape({
-    firstName: yup.string().required("First Name cannot be empty"),
-    lastName: yup.string().required("Last Name cannot be empty"),
-    email: yup
-      .string()
-      .email("Looks like this is not an email")
-      .required("Email cannot be empty"),
-    password: yup
-      .string()
-      .min(4, "Password must be at least 4 characters long")
-      .max(20, "Password cannot be longer than 20 characters")
-      .required("Password cannot be empty"),
-    password_confirmation: yup
-      .string()
-      .oneOf([yup.ref('password'), null], 'Passwords must match')
-      .required('Confirm Password cannot be empty')
+   
   });
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm({
@@ -64,15 +45,22 @@ const Form = ({ setIsOpen, setName, setOpenToS }) => {
   });
 
   const [user, setUser] = useState({
-    firstName: "",
-    lastName: "",
+    name: "",
+
     email: "",
     password: "",
     password_confirmation: ""
   });
 
-  const onSubmit = (data) => {
-  axiosclient.post('/')
+const onSubmit = (data) => {
+  axiosclient.get('sanctum/csrf-cookie').then(()=>{
+axiosclient.post('/register',data).then((a)=>{
+  console.log(a)
+  axiosclient.get('/api/user').then(a=>{
+    console.log(a.data)
+  })
+})})
+console.log(data)
     setUser(data);
     reset({
       firstName: "",
@@ -106,7 +94,7 @@ const Form = ({ setIsOpen, setName, setOpenToS }) => {
          
         </div>
       ))}
-      <input type="submit" value="Create account" />
+      <input type="submit" value="Creer compte" />
     </form>
   );
 };

@@ -31,41 +31,19 @@ const SignUp = () => {
                         <span className="word" style={{color: "#87b3fe"}}>continue</span>
                         <span className="word">excitant</span></span>
                     </span>
-                    <span>In simple steps</span>
+                    <span>pour vous enrichir</span>
                 </h1>
                 <p>
-                Learn by watching the best ones in the industry
-                Doing their magic in real-time. Get inside their head
-                and become one of them today.
+             L'office de formation proffesionel de la promoion de travail propose une variéte de programmes de formation continue   
                 </p>
             </div>
             <div className="sign-up-right sign-up-column">
                  <div><img src='../../../public/images/OFPPT.png' height={"100px"}></img></div>
                 <Form setName={setName} setIsOpen={setIsOpen} setOpenToS={setOpenToS} />
-                <p className='signup-form-terms' id="terms">By clicking the button you agree our&nbsp; 
-                <button aria-labelledby="terms" onClick={()=> setOpenToS(true)}>terms and services</button>
-                </p>
+               
             </div>
             </main>
-                <Modal isOpen={isOpen} name={name} setIsOpen={setIsOpen}>
-                    <h3>
-                    Thank you {name}!
-                    </h3>
-                     <p>Your free trial has been sent to your email. Please check your inbox for instructions on how to get started.</p>
-                </Modal>
-                <Modal isOpen={openToS} setIsOpen={setOpenToS}>  
-                    <h3>
-                    Terms of Services
-                    </h3>
-                     <p>These terms and conditions ("Terms") govern your use of our website and services. By accessing or using our website, you agree to be bound by these Terms.
-                     </p>
-                     <ul>
-                         {termsOfService.map(term=><li><p>{term}</p></li>)}
-                     </ul>
-                     <p>
-                     If you have any questions or concerns about these Terms, please contact us at <span style={{textDecoration:'underline'}}>support@mastertodesigncode.com. </span>
-                     </p>
-                </Modal>
+          
         </div>
     )
 }
